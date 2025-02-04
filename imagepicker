@@ -1,0 +1,24 @@
+import 'package:image_picker/image_picker.dart';
+import 'dart:typed_data';
+
+Uint8List? image;
+
+  Future<void> pickImage() async{
+    final ImagePicker picker = ImagePicker();
+    final XFile? pic = await picker.pickImage(source: ImageSource.gallery);
+    if(pic != null){
+        image = await pic.readAsBytes();
+        setState(() {
+
+        });
+
+    }
+  }
+// using picked image in prefixIcon
+prefixIcon: image!=null
+                      ?Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircleAvatar(
+                                            backgroundImage: MemoryImage(image!),),
+                      )
+                      :Icon(Icons.person),
